@@ -65,7 +65,7 @@ public class driveSubsystem extends Subsystem {
     a = ta.getDouble(0.0);
     v = tv.getBoolean(false);
 
-    m_Drive = new MecanumDrive(leftFront,leftBack,rightFront,rightBack);
+    //m_Drive = new MecanumDrive(leftFront,leftBack,rightFront,rightBack);
     
   }
   public void periodic(){
@@ -81,7 +81,7 @@ public class driveSubsystem extends Subsystem {
     leftBack.set(yspeed - xspeed + zrotation);
     rightBack.set(yspeed + xspeed - zrotation);
   }
-  /*public void LimelightAim(double yspeed , double xspeed , double zrotation){
+  public void LimelightAim(double yspeed , double xspeed , double zrotation){
     if(v==false){
       m_Drive.driveCartesian(yspeed * 0, xspeed * 0, zrotation);
       if(x<0){
@@ -103,5 +103,5 @@ public class driveSubsystem extends Subsystem {
     else{
       m_Drive.driveCartesian(yspeed * 0, xspeed * 0, zrotation * 0);
     }
-  }*/
+  }
 }

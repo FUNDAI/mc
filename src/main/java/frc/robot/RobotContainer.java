@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.LimelightAim;
 //import frc.robot.commands.LimelightAim;
 import frc.robot.commands.Mdrive;
 import frc.robot.subsystems.driveSubsystem;
@@ -33,7 +34,7 @@ public class RobotContainer {
     () -> js1.getRawAxis(Constants.leftStick_Y), 
     () -> js1.getRawAxis(Constants.leftStick_X), 
     () -> js1.getRawAxis(Constants.rightStick_X)));
-   // drivesubsystem.setDefaultCommand(new LimelightAim(drivesubsystem,0,0,0));
+    drivesubsystem.setDefaultCommand(new LimelightAim(drivesubsystem,0,0,0));
     // Configure the button bindings
     configureButtonBindings();
     
@@ -46,8 +47,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-   // new JoystickButton(js1, Constants.Btn_A)
-    //.whenHeld( new LimelightAim(drivesubsystem, 0.4, 0.4, 0.4));
+    new JoystickButton(js1, Constants.Btn_A)
+    .whenHeld( (Command) new LimelightAim(drivesubsystem, 0.4, 0.4, 0.4));
   }
 
   /**
