@@ -57,7 +57,7 @@ public class driveSubsystem extends Subsystem {
     a = ta.getDouble(0.0);
     v = tv.getBoolean(false);
 
-    //m_Drive = new MecanumDrive(leftFront,leftBack,rightFront,rightBack);
+    m_Drive = new MecanumDrive(leftFront,leftBack,rightFront,rightBack);
     
   }
   public void periodic(){
@@ -92,8 +92,5 @@ public class driveSubsystem extends Subsystem {
         m_Drive.driveCartesian(yspeed * 0, xspeed * 0, zrotation * 0);
       }
     } 
-    else{
-      m_Drive.driveCartesian(yspeed * 0, xspeed * 0, zrotation * 0);
-    }
   }
 }
