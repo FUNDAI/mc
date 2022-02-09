@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -14,50 +10,24 @@ import frc.robot.commands.LimelightAim;
 import frc.robot.commands.Mdrive;
 import frc.robot.subsystems.driveSubsystem;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
   private final driveSubsystem drivesubsystem = new driveSubsystem();
-
-
-
   public static Joystick js1 = new Joystick(Constants.js1);
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     drivesubsystem.setDefaultCommand(new Mdrive(drivesubsystem, 
     () -> js1.getRawAxis(Constants.leftStick_Y), 
     () -> js1.getRawAxis(Constants.leftStick_X), 
     () -> js1.getRawAxis(Constants.rightStick_X)));
     drivesubsystem.setDefaultCommand(new LimelightAim(drivesubsystem,0,0,0));
-    // Configure the button bindings
+    
     configureButtonBindings();
     
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
   private void configureButtonBindings() {
     new JoystickButton(js1, Constants.Btn_A)
     .whenHeld( (Command) new LimelightAim(drivesubsystem, 0.4, 0.4, 0.4));
+    //這裡我不知道怎弄，按照官方用法會有錯誤，用Quick fixed 的add argunment 就好了，他加了前面的(Command)
   }
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
- /* public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-  }*/
 }
