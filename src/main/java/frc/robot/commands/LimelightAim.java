@@ -8,32 +8,54 @@ public class LimelightAim extends Command {
   private final double yspeed;
   private final double xspeed;
   private final double zrotation;
-
+  private final boolean v;
+  private final double x;
+  private final double y;
   public LimelightAim(driveSubsystem drivesubsystem , double yspeed , double xspeed , double zrotation) {
     this.drivesubsystem = drivesubsystem;
     this.yspeed = yspeed;
     this.xspeed = xspeed;
     this.zrotation = zrotation;
+    x = drivesubsystem.xvalue();
+    y = drivesubsystem.yvalue();
+    v = drivesubsystem.vvalue();
     requires(drivesubsystem);
   }
 
   @Override
-  protected void initialize() {}
+  public void initialize() {}
 
   @Override
-  protected void execute() {
-    drivesubsystem.LimelightAim(yspeed, xspeed, zrotation);
+  public void execute() {
+    if(v==false){
+      drivesubsystem.MecanumDriveaa(yspeed, xspeed, zrotation);
+      if(x<0){
+        drivesubsystem.MecanumDriveaa(yspeed, xspeed, zrotation);
+      }
+      if(x>0){
+        drivesubsystem.MecanumDriveaa(yspeed * 0, - xspeed, zrotation * 0);
+      }
+      if(y<0){
+        drivesubsystem.MecanumDriveaa(yspeed, xspeed * 0 , zrotation * 0);
+      }
+      if(y>0){
+        drivesubsystem.MecanumDriveaa(- yspeed , xspeed * 0 , zrotation * 0);
+      }
+      if( x==0 && y==0){
+        drivesubsystem.MecanumDriveaa(yspeed * 0, xspeed * 0, zrotation * 0);
+      }
+    } 
     
   }
 
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return false;
   }
 
   @Override
-  protected void end() {}
+  public void end() {}
 
   @Override
-  protected void interrupted() {}
+  public void interrupted() {}
 }

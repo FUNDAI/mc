@@ -57,9 +57,19 @@ public class driveSubsystem extends Subsystem {
     a = ta.getDouble(0.0);
     v = tv.getBoolean(false);
 
-    m_Drive = new MecanumDrive(leftFront,leftBack,rightFront,rightBack);
-    
+    m_Drive = new MecanumDrive(leftFront,leftBack,rightFront,rightBack);   
   }
+  
+  public double xvalue(){
+    return tx.getDouble(0.0);
+  }
+  public double yvalue(){
+    return ty.getDouble(0.0);
+  }
+  public boolean vvalue(){
+    return tv.getBoolean(false);
+  }
+
   public void periodic(){
     SmartDashboard.putNumber("LimelightX", x);
     SmartDashboard.putNumber("LimelightY", y);
@@ -72,25 +82,5 @@ public class driveSubsystem extends Subsystem {
     rightFront.set(yspeed - xspeed - zrotation);
     leftBack.set(yspeed - xspeed + zrotation);
     rightBack.set(yspeed + xspeed - zrotation);
-  }
-  public void LimelightAim(double yspeed , double xspeed , double zrotation){
-    if(v==false){
-      m_Drive.driveCartesian(yspeed * 0, xspeed * 0, zrotation);
-      if(x<0){
-        m_Drive.driveCartesian(yspeed * 0,xspeed,zrotation * 0);
-      }
-      if(x>0){
-        m_Drive.driveCartesian(yspeed * 0, - xspeed, zrotation * 0);
-      }
-      if(y<0){
-        m_Drive.driveCartesian(yspeed, xspeed * 0 , zrotation * 0);
-      }
-      if(y>0){
-        m_Drive.driveCartesian(- yspeed , xspeed * 0 , zrotation * 0);
-      }
-      if( x==0 && y==0){
-        m_Drive.driveCartesian(yspeed * 0, xspeed * 0, zrotation * 0);
-      }
-    } 
   }
 }
