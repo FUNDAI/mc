@@ -27,6 +27,7 @@ public class LimelightAim extends Command {
 
   @Override
   public void execute() {
+    //這裡是我用自己的想法寫的，很爛，別鞭
     if(v==false){
       drivesubsystem.MecanumDriveaa(yspeed, xspeed, zrotation);
       if(x<0){
