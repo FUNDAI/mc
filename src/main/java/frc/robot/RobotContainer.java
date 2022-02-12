@@ -22,7 +22,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     new JoystickButton(js1, Constants.Btn_A)
-    .whenHeld( (Command) new LimelightAim(drivesubsystem, 0.4, 0.4, 0.4));
-    //這裡我不知道怎弄，按照官方用法會有錯誤，用Quick fixed 的add argunment 就好了，他加了前面的(Command)
+    .whileHeld((Command) new LimelightAim(drivesubsystem,0.4,0.4,0.4));
+    //這裡我不知道怎弄,用Quick fixed 的add argunment 就好了，他加了前面的(Command)
   }
 }
