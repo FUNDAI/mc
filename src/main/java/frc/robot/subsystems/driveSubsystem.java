@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -12,10 +12,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class driveSubsystem extends Subsystem {
-  WPI_TalonSRX leftFront;
-  WPI_TalonSRX leftBack;
-  WPI_TalonSRX rightFront;
-  WPI_TalonSRX rightBack;
+  WPI_TalonFX leftFront;
+  WPI_TalonFX leftBack;
+  WPI_TalonFX rightFront;
+  WPI_TalonFX rightBack;
 
 
   MotorControllerGroup leftGroup ;
@@ -43,20 +43,15 @@ public class driveSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    leftFront = new WPI_TalonSRX(Constants.leftFront);
+    leftFront = new WPI_TalonFX(Constants.leftFront);
     leftFront.setInverted(false);
-    leftBack = new WPI_TalonSRX(Constants.leftBack);
+    leftBack = new WPI_TalonFX(Constants.leftBack);
     leftBack.setInverted(false);
-    rightFront = new WPI_TalonSRX(Constants.rightFront);
+    rightFront = new WPI_TalonFX(Constants.rightFront);
     rightFront.setInverted(true);
-    rightBack = new WPI_TalonSRX(Constants.rightBack);
+    rightBack = new WPI_TalonFX(Constants.rightBack);
     rightBack.setInverted(true);
-
-    x = tx.getDouble(0.0);
-    y = ty.getDouble(0.0);
-    a = ta.getDouble(0.0);
-    v = tv.getBoolean(false);
-
+  
     m_Drive = new MecanumDrive(leftFront,leftBack,rightFront,rightBack);   
   }
   
@@ -68,6 +63,9 @@ public class driveSubsystem extends Subsystem {
   }
   public boolean vvalue(){
     return tv.getBoolean(false);
+  }
+  public double avalue(){
+    return ta.getDouble(0.0);
   }
 
   public void periodic(){
